@@ -8,7 +8,9 @@ namespace AddressBook
     public partial class AddressBook : Form
     {
         private List<Contact> Contacts = new List<Contact>();
-        private string filePath = "F:\\Cloudutvecklare Azure Jensen\\Inlämningsuppgift\\1 - Inlämningsuppgift\\Address Book.txt";
+
+        string filename = "AddressBook_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+        private string filePath = @"F:\Cloudutvecklare Azure Jensen\Inlämningsuppgift\1 - Inlämningsuppgift\AddressBook.txt";
 
         public AddressBook()
         {
@@ -16,24 +18,15 @@ namespace AddressBook
             UpdateContactGridView(); // Display contacts in the DataGridView
         }
 
-        // Method to ensure the directory exists
-        private void EnsureDirectoryExists()
-        {
-            string directoryPath = @"C:\ff";
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-
-        }
+        
         private void SaveContactsToFile(List<Contact> contacts)
         {
-            EnsureDirectoryExists(); // Make sure the directory exists before saving (make sure the folder is ready before saving)
+            
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 foreach (var contact in contacts)
                 {
-                    writer.WriteLine($"{contact.Name}|{contact.StreetAddress}|{contact.PostalCode}|{contact.City}|{contact.PhoneNumber}|{contact.Email}");
+                    writer.WriteLine($"{contact.Name}|{contact.Street}|{contact.PostalCode}|{contact.City}|{contact.Telephone}|{contact.Email}");
                 }
             }
         }
@@ -48,15 +41,15 @@ namespace AddressBook
                     while ((line = reader.ReadLine()) != null)
                     {
                         var parts = line.Split('|');
-                        if (parts.Length >= 7)
+                        if (parts.Length == 6)
                         {
                             contacts.Add(new Contact
                             {
                                 Name = parts[0],
-                                StreetAddress = parts[1],
+                                Street = parts[1],
                                 City = parts[2],
                                 PostalCode = parts[3],
-                                PhoneNumber = parts[4],
+                                Telephone = parts[4],
                                 Email = parts[5]
                             });
                         }
@@ -79,11 +72,43 @@ namespace AddressBook
             // Add each contact to the DataGridView
             foreach (var contact in contactsdata)
             {
-                dataGridViewContacts.Rows.Add(contact.Name, contact.StreetAddress, contact.PostalCode, contact.City, contact.PhoneNumber, contact.Email);
+                dataGridViewContacts.Rows.Add(contact.Name, contact.Street, contact.PostalCode, contact.City, contact.Telephone, contact.Email);
             }
         }
+        // Event handler for Add button click
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            // Create a new contact from the user input fields
+            Contact contact = new Contact
+            {
+                Name = textBoxName.Text,
+                Street = textBoxStreet.Text,
+                PostalCode = textBoxPostelCode.Text,
+                City = textBoxCity.Text,
+                Telephone = textBoxTelephone.Text,
+                Email = textBoxEmail.Text,
+            };
+            // Load existing contacts, add the new contact, and save all
+            Contacts = LoadContactsFromFile(); // Reload all contacts to avoid overwriting the previous ones
+            Contacts.Add(contact);
+            SaveContactsToFile(Contacts);
+            UpdateContactGridView();// Refresh the DataGridView to show the new contact
+
+            // Clear the input fields after adding the contact
+            textBoxName.Text = "";
+            textBoxStreet.Text = "";
+            textBoxPostelCode.Text = "";
+            textBoxCity.Text = "";
+            textBoxTelephone.Text = "";
+            textBoxEmail.Text = "";
 
 
+        }
+
+        private void dataGridViewContacts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 

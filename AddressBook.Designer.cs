@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddressBook));
             labelHeading = new Label();
             labelName = new Label();
-            labelStreetAddress = new Label();
+            labelStreet = new Label();
             textBoxName = new TextBox();
             textBoxStreet = new TextBox();
             textBoxPostelCode = new TextBox();
@@ -39,23 +39,23 @@
             textBoxEmail = new TextBox();
             labelEmail = new Label();
             textBoxTelephone = new TextBox();
-            textBoxPostelAddress = new TextBox();
             labelTelephone = new Label();
-            labelPostelAddress = new Label();
             buttonAdd = new Button();
             buttonUpdate = new Button();
             buttonDelete = new Button();
             dataGridViewContacts = new DataGridView();
-            Name = new DataGridViewTextBoxColumn();
-            StreetAddress = new DataGridViewTextBoxColumn();
-            City = new DataGridViewTextBoxColumn();
-            PostalCode = new DataGridViewTextBoxColumn();
-            PhoneNumber = new DataGridViewTextBoxColumn();
-            Email = new DataGridViewTextBoxColumn();
             labelSearch = new Label();
             textBoxSearch = new TextBox();
             buttonSearch = new Button();
             pictureBox1 = new PictureBox();
+            textBoxCity = new TextBox();
+            labelCity = new Label();
+            Name = new DataGridViewTextBoxColumn();
+            StreetAddress = new DataGridViewTextBoxColumn();
+            PostalCode = new DataGridViewTextBoxColumn();
+            City = new DataGridViewTextBoxColumn();
+            PhoneNumber = new DataGridViewTextBoxColumn();
+            Email = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewContacts).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -82,16 +82,16 @@
             labelName.TabIndex = 1;
             labelName.Text = "Name";
             // 
-            // labelStreetAddress
+            // labelStreet
             // 
-            labelStreetAddress.AutoSize = true;
-            labelStreetAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelStreetAddress.ForeColor = SystemColors.HotTrack;
-            labelStreetAddress.Location = new Point(12, 284);
-            labelStreetAddress.Name = "labelStreetAddress";
-            labelStreetAddress.Size = new Size(281, 54);
-            labelStreetAddress.TabIndex = 2;
-            labelStreetAddress.Text = "Street Address";
+            labelStreet.AutoSize = true;
+            labelStreet.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelStreet.ForeColor = SystemColors.HotTrack;
+            labelStreet.Location = new Point(12, 284);
+            labelStreet.Name = "labelStreet";
+            labelStreet.Size = new Size(127, 54);
+            labelStreet.TabIndex = 2;
+            labelStreet.Text = "Street";
             // 
             // textBoxName
             // 
@@ -131,7 +131,7 @@
             // textBoxEmail
             // 
             textBoxEmail.Font = new Font("Segoe UI", 12F);
-            textBoxEmail.Location = new Point(319, 697);
+            textBoxEmail.Location = new Point(317, 700);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(736, 61);
             textBoxEmail.TabIndex = 15;
@@ -141,7 +141,7 @@
             labelEmail.AutoSize = true;
             labelEmail.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelEmail.ForeColor = SystemColors.HotTrack;
-            labelEmail.Location = new Point(11, 700);
+            labelEmail.Location = new Point(9, 703);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(117, 54);
             labelEmail.TabIndex = 13;
@@ -150,40 +150,21 @@
             // textBoxTelephone
             // 
             textBoxTelephone.Font = new Font("Segoe UI", 12F);
-            textBoxTelephone.Location = new Point(320, 603);
+            textBoxTelephone.Location = new Point(318, 606);
             textBoxTelephone.Name = "textBoxTelephone";
             textBoxTelephone.Size = new Size(736, 61);
             textBoxTelephone.TabIndex = 12;
-            // 
-            // textBoxPostelAddress
-            // 
-            textBoxPostelAddress.Font = new Font("Segoe UI", 12F);
-            textBoxPostelAddress.Location = new Point(320, 502);
-            textBoxPostelAddress.Name = "textBoxPostelAddress";
-            textBoxPostelAddress.Size = new Size(736, 61);
-            textBoxPostelAddress.TabIndex = 11;
             // 
             // labelTelephone
             // 
             labelTelephone.AutoSize = true;
             labelTelephone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTelephone.ForeColor = SystemColors.HotTrack;
-            labelTelephone.Location = new Point(12, 606);
+            labelTelephone.Location = new Point(10, 609);
             labelTelephone.Name = "labelTelephone";
             labelTelephone.Size = new Size(206, 54);
             labelTelephone.TabIndex = 10;
             labelTelephone.Text = "Telephone";
-            // 
-            // labelPostelAddress
-            // 
-            labelPostelAddress.AutoSize = true;
-            labelPostelAddress.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelPostelAddress.ForeColor = SystemColors.HotTrack;
-            labelPostelAddress.Location = new Point(12, 505);
-            labelPostelAddress.Name = "labelPostelAddress";
-            labelPostelAddress.Size = new Size(283, 54);
-            labelPostelAddress.TabIndex = 9;
-            labelPostelAddress.Text = "Postel Address";
             // 
             // buttonAdd
             // 
@@ -191,12 +172,13 @@
             buttonAdd.FlatStyle = FlatStyle.Popup;
             buttonAdd.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonAdd.ForeColor = SystemColors.ControlLightLight;
-            buttonAdd.Location = new Point(199, 827);
+            buttonAdd.Location = new Point(206, 880);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(232, 93);
             buttonAdd.TabIndex = 16;
             buttonAdd.Text = "Add";
             buttonAdd.UseVisualStyleBackColor = false;
+            buttonAdd.Click += buttonAdd_Click;
             // 
             // buttonUpdate
             // 
@@ -204,7 +186,7 @@
             buttonUpdate.FlatStyle = FlatStyle.Popup;
             buttonUpdate.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonUpdate.ForeColor = SystemColors.ControlLightLight;
-            buttonUpdate.Location = new Point(507, 827);
+            buttonUpdate.Location = new Point(514, 880);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(232, 93);
             buttonUpdate.TabIndex = 17;
@@ -217,7 +199,7 @@
             buttonDelete.FlatStyle = FlatStyle.Popup;
             buttonDelete.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             buttonDelete.ForeColor = SystemColors.ControlLightLight;
-            buttonDelete.Location = new Point(814, 827);
+            buttonDelete.Location = new Point(821, 880);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(232, 93);
             buttonDelete.TabIndex = 18;
@@ -227,54 +209,13 @@
             // dataGridViewContacts
             // 
             dataGridViewContacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewContacts.Columns.AddRange(new DataGridViewColumn[] { Name, StreetAddress, City, PostalCode, PhoneNumber, Email });
+            dataGridViewContacts.Columns.AddRange(new DataGridViewColumn[] { Name, StreetAddress, PostalCode, City, PhoneNumber, Email });
             dataGridViewContacts.Location = new Point(1140, 281);
             dataGridViewContacts.Name = "dataGridViewContacts";
             dataGridViewContacts.RowHeadersWidth = 102;
             dataGridViewContacts.Size = new Size(1606, 493);
             dataGridViewContacts.TabIndex = 19;
-            // 
-            // Name
-            // 
-            Name.HeaderText = "Name";
-            Name.MinimumWidth = 12;
-            Name.Name = "Name";
-            Name.Width = 250;
-            // 
-            // StreetAddress
-            // 
-            StreetAddress.HeaderText = "StreetAddress";
-            StreetAddress.MinimumWidth = 12;
-            StreetAddress.Name = "StreetAddress";
-            StreetAddress.Width = 250;
-            // 
-            // City
-            // 
-            City.HeaderText = "City";
-            City.MinimumWidth = 12;
-            City.Name = "City";
-            City.Width = 250;
-            // 
-            // PostalCode
-            // 
-            PostalCode.HeaderText = "PostalCode";
-            PostalCode.MinimumWidth = 12;
-            PostalCode.Name = "PostalCode";
-            PostalCode.Width = 250;
-            // 
-            // PhoneNumber
-            // 
-            PhoneNumber.HeaderText = "Column1";
-            PhoneNumber.MinimumWidth = 12;
-            PhoneNumber.Name = "PhoneNumber";
-            PhoneNumber.Width = 250;
-            // 
-            // Email
-            // 
-            Email.HeaderText = "Column1";
-            Email.MinimumWidth = 12;
-            Email.Name = "Email";
-            Email.Width = 250;
+            dataGridViewContacts.CellContentClick += dataGridViewContacts_CellContentClick;
             // 
             // labelSearch
             // 
@@ -319,12 +260,75 @@
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
+            // textBoxCity
+            // 
+            textBoxCity.Font = new Font("Segoe UI", 12F);
+            textBoxCity.Location = new Point(317, 495);
+            textBoxCity.Name = "textBoxCity";
+            textBoxCity.Size = new Size(736, 61);
+            textBoxCity.TabIndex = 25;
+            // 
+            // labelCity
+            // 
+            labelCity.AutoSize = true;
+            labelCity.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelCity.ForeColor = SystemColors.HotTrack;
+            labelCity.Location = new Point(9, 498);
+            labelCity.Name = "labelCity";
+            labelCity.Size = new Size(91, 54);
+            labelCity.TabIndex = 24;
+            labelCity.Text = "City";
+            // 
+            // Name
+            // 
+            Name.HeaderText = "Name";
+            Name.MinimumWidth = 12;
+            Name.Name = "Name";
+            Name.Width = 250;
+            // 
+            // StreetAddress
+            // 
+            StreetAddress.HeaderText = "Street";
+            StreetAddress.MinimumWidth = 12;
+            StreetAddress.Name = "StreetAddress";
+            StreetAddress.Width = 250;
+            // 
+            // PostalCode
+            // 
+            PostalCode.HeaderText = "PostalCode";
+            PostalCode.MinimumWidth = 12;
+            PostalCode.Name = "PostalCode";
+            PostalCode.Width = 250;
+            // 
+            // City
+            // 
+            City.HeaderText = "City";
+            City.MinimumWidth = 12;
+            City.Name = "City";
+            City.Width = 250;
+            // 
+            // PhoneNumber
+            // 
+            PhoneNumber.HeaderText = "Telephone";
+            PhoneNumber.MinimumWidth = 12;
+            PhoneNumber.Name = "PhoneNumber";
+            PhoneNumber.Width = 250;
+            // 
+            // Email
+            // 
+            Email.HeaderText = "Email";
+            Email.MinimumWidth = 12;
+            Email.Name = "Email";
+            Email.Width = 250;
+            // 
             // AddressBook
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.HighlightText;
-            ClientSize = new Size(2781, 989);
+            ClientSize = new Size(2786, 1020);
+            Controls.Add(textBoxCity);
+            Controls.Add(labelCity);
             Controls.Add(pictureBox1);
             Controls.Add(buttonSearch);
             Controls.Add(textBoxSearch);
@@ -336,14 +340,12 @@
             Controls.Add(textBoxEmail);
             Controls.Add(labelEmail);
             Controls.Add(textBoxTelephone);
-            Controls.Add(textBoxPostelAddress);
             Controls.Add(labelTelephone);
-            Controls.Add(labelPostelAddress);
             Controls.Add(textBoxPostelCode);
             Controls.Add(labelPostelCode);
             Controls.Add(textBoxStreet);
             Controls.Add(textBoxName);
-            Controls.Add(labelStreetAddress);
+            Controls.Add(labelStreet);
             Controls.Add(labelName);
             Controls.Add(labelHeading);
             ForeColor = SystemColors.ActiveCaptionText;
@@ -357,7 +359,7 @@
 
         private Label labelHeading;
         private Label labelName;
-        private Label labelStreetAddress;
+        private Label labelStreet;
         private TextBox textBoxName;
         private TextBox textBoxStreet;
         private TextBox textBoxPostelCode;
@@ -365,9 +367,7 @@
         private TextBox textBoxEmail;
         private Label labelEmail;
         private TextBox textBoxTelephone;
-        private TextBox textBoxPostelAddress;
         private Label labelTelephone;
-        private Label labelPostelAddress;
         private Button buttonAdd;
         private Button buttonUpdate;
         private Button buttonDelete;
@@ -376,10 +376,12 @@
         private TextBox textBoxSearch;
         private Button buttonSearch;
         private PictureBox pictureBox1;
+        private TextBox textBoxCity;
+        private Label labelCity;
         private DataGridViewTextBoxColumn Name;
         private DataGridViewTextBoxColumn StreetAddress;
-        private DataGridViewTextBoxColumn City;
         private DataGridViewTextBoxColumn PostalCode;
+        private DataGridViewTextBoxColumn City;
         private DataGridViewTextBoxColumn PhoneNumber;
         private DataGridViewTextBoxColumn Email;
     }
