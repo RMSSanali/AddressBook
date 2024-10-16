@@ -20,7 +20,6 @@ namespace AddressBook.Classes
             public string Email { get; set; }
         
         public override string ToString() // This method returns a well-formatted string with the contact details.
-
         {
             return $"Name: {Name}, Street Address: {StreetAddress},Postal Code: {PostalCode},Code: {City},PhoneNumber: {PhoneNumber}, Email: {Email}";
         }
