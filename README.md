@@ -39,6 +39,7 @@ Each contact can contain:
 
 ## Project Structure
 
+```text
 AddressBook/
 ├── Classes/
 │   └── Contact.cs
@@ -50,6 +51,7 @@ AddressBook/
 ├── AddressBook.sln
 ├── AddressBook.txt
 └── Program.cs
+```
 
 ## How to Run
 
